@@ -225,8 +225,7 @@ public class PunchHoleCoachMarkTestCase extends ActivityInstrumentationTestCase2
         final int width = mTargetView.getWidth();
         final int height = mTargetView.getHeight();
 
-        float expectedCircleRadius = (height + diameterGap) / 2;
-        expectedCircleRadius += PADDING;
+        float expectedCircleRadius = ((height + diameterGap) / 2) + PADDING;
 
         final int expectedCircleStartOffsetX = animationShouldHappen
                 ?  targetScreenLoc[0] + (int) expectedCircleRadius

@@ -112,8 +112,7 @@ public class PunchHoleCoachMark extends InternallyAnchoredCoachMark {
 
         mTargetView.getLocationOnScreen(mTargetViewLoc);
         mAnchor.getLocationOnScreen(mAnchorViewLoc);
-        mRelCircleRadius = (mTargetView.getHeight() + mGap) / 2;
-        mRelCircleRadius += mPunchHolePadding;
+        mRelCircleRadius = Math.max(((mTargetView.getHeight() + mGap) / 2) + mPunchHolePadding, 0f);
 
         // If the coachmark has an horizontal translation animation, draw the
         // circle on the start of the target view (it will move to the end).
@@ -327,7 +326,10 @@ public class PunchHoleCoachMark extends InternallyAnchoredCoachMark {
         }
 
         /**
-         * Set the padding for the punch hole around the anchor view
+         * Set the padding (in pixels) for the punch hole around the anchor view.
+         *
+         * A positive value will increase the punch hole's radius by N pixels
+         * and a negative value will reduce the radius by N pixels.
          *
          * @param punchHolePadding the padding to be added to the punch hole (in pixels)
          */
