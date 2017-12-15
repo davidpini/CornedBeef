@@ -48,6 +48,7 @@ public class PunchHoleCoachMark extends InternallyAnchoredCoachMark {
     private final float mGap;
     private final long mHorizontalTranslationDuration;
     private final int mContentPosition;
+    private final float mPunchHolePadding;
 
     private final View mTargetView;
     private final int[] mTargetViewLoc = new int[2];
@@ -76,6 +77,8 @@ public class PunchHoleCoachMark extends InternallyAnchoredCoachMark {
         mHorizontalTranslationDuration = builder.horizontalAnimationDuration;
 
         mContentPosition = builder.contentPositioning;
+
+        mPunchHolePadding = builder.punchHolePadding;
     }
 
     @Override
@@ -110,6 +113,7 @@ public class PunchHoleCoachMark extends InternallyAnchoredCoachMark {
         mTargetView.getLocationOnScreen(mTargetViewLoc);
         mAnchor.getLocationOnScreen(mAnchorViewLoc);
         mRelCircleRadius = (mTargetView.getHeight() + mGap) / 2;
+        mRelCircleRadius += mPunchHolePadding;
 
         // If the coachmark has an horizontal translation animation, draw the
         // circle on the start of the target view (it will move to the end).
@@ -231,6 +235,8 @@ public class PunchHoleCoachMark extends InternallyAnchoredCoachMark {
         private int contentWidth = MATCH_PARENT;
         private int contentHeight = WRAP_CONTENT;
 
+        private float punchHolePadding = 0f;
+
         public PunchHoleCoachMarkBuilder(Context context, View anchor, String message) {
             super(context, anchor, message);
         }
@@ -317,6 +323,16 @@ public class PunchHoleCoachMark extends InternallyAnchoredCoachMark {
             }
 
             this.horizontalAnimationDuration = horizontalDuration;
+            return this;
+        }
+
+        /**
+         * Set the padding for the punch hole around the anchor view
+         *
+         * @param punchHolePadding the padding to be added to the punch hole (in pixels)
+         */
+        public PunchHoleCoachMarkBuilder setPunchHolePadding(final float punchHolePadding) {
+            this.punchHolePadding = punchHolePadding;
             return this;
         }
 

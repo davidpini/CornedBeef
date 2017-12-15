@@ -43,6 +43,7 @@ public class PunchHoleCoachMarkTestCase extends ActivityInstrumentationTestCase2
 
     private TextView mTextView;
     private static final String MESSAGE = "spam spam spam";
+    private static final float PADDING = 10f;
     private final int OVERLAY_COLOR = Color.BLACK;
 
     public PunchHoleCoachMarkTestCase() {
@@ -224,7 +225,8 @@ public class PunchHoleCoachMarkTestCase extends ActivityInstrumentationTestCase2
         final int width = mTargetView.getWidth();
         final int height = mTargetView.getHeight();
 
-        final float expectedCircleRadius = (height + diameterGap) / 2;
+        float expectedCircleRadius = (height + diameterGap) / 2;
+        expectedCircleRadius += PADDING;
 
         final int expectedCircleStartOffsetX = animationShouldHappen
                 ?  targetScreenLoc[0] + (int) expectedCircleRadius
@@ -333,6 +335,7 @@ public class PunchHoleCoachMarkTestCase extends ActivityInstrumentationTestCase2
                 .setOnGlobalClickListener(mMockCoachMarkClickListener)
                 .setOverlayColor(OVERLAY_COLOR)
                 .setContentLayoutParams(MATCH_PARENT, MATCH_PARENT, POSITION_CONTENT_AUTOMATICALLY)
+                .setPunchHolePadding(PADDING)
                 .build();
     }
 }
